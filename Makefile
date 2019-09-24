@@ -1,25 +1,12 @@
-.PHONY: all dirs dash
+.PHONY: all
 
-all: dirs
+all: packages/swiper
 
-dirs: repos themes elisp
+packages/swiper: packages
+	git clone https://github.com/abo-abo/swiper packages/swiper
 
-repos:
-	mkdir repos
-
-themes:
-	mkdir themes
-
-elisp:
-	mkdir elisp
-
-dash: elisp/dash.el
-
-elisp/dash.el: repos/dash.el
-	cp repos/dash.el/dash.el elisp/dash.el
-
-repos/dash.el:
-	git clone git@github.com:magnars/dash.el.git repos/dash.el
+packages:
+	mkdir packages
 
 clean:
-	rm -rf repos themes elisp
+	rm -rf packages
